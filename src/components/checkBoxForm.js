@@ -23,8 +23,8 @@ class CheckBoxForm extends Component {
  if (!text) {
  return;
  }
- this.props.onCommentSubmit({ isChecked: isChecked, text: text });
- this.setState({ isChecked: '', text: '' });
+ this.props.onTaskSubmit({ isChecked: isChecked, text: text });
+ this.setState({ isChecked: false, text: '' });
  }
  render() {
  return (

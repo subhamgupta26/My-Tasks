@@ -8,21 +8,21 @@ class AddCheckBox extends Component {
  super(props);
  this.state = { data: this.props.data };
  }
- handleCommentSubmit=(comment)=> {
-    console.log('comment',comment);
-    let comments = this.state.data;
-    comment.id = Date.now();
-    let newComments = comments.concat([comment]);
-    console.log('newComments',newComments);
-    this.setState({ data: newComments });
-    this.props.onCheckBoxSubmit(newComments);
+ handleTaskSubmit=(task)=> {
+    console.log('task',task);
+    let tasks = this.state.data;
+    task.id = Date.now();
+    let newTasks = tasks.concat([task]);
+    console.log('newTasks',newTasks);
+    this.setState({ data: newTasks });
+    this.props.onCheckBoxSubmit(newTasks);
    }
  render() {
  return (
  <div style={ style.commentBox }>
  <h2>Comments:</h2>
  <CheckBoxList data={ this.state.data }/>
- <CheckBoxForm onCommentSubmit={ this.handleCommentSubmit }/>
+ <CheckBoxForm onTaskSubmit={ this.handleTaskSubmit }/>
  </div>
  )
  }

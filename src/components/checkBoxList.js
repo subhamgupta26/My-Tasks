@@ -3,17 +3,17 @@ import CheckBox from './checkBox';
 import style from '../style';
 class CheckBoxList extends Component {
  render() {
- let commentNodes = this.props.data.map(comment => {
-     console.log('inside list',comment);
+ let taskNodes = this.props.data.map(task => {
+     console.log('inside list',task);
  return (
- <CheckBox isChecked={ comment.isChecked } text={ comment.text }>
- { comment.text}
+ <CheckBox isChecked={ task.isChecked } text={ task.text }>
+ { task.text}
  </CheckBox>
  )
  })
  return (
  <div style={ style.commentList }>
- { commentNodes }
+ { taskNodes }
  </div>
  )
  }
