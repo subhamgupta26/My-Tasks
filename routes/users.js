@@ -4,7 +4,7 @@ var router = express.Router();
 // var _ = require('underscore');
 
 var userService = new (require('../service/userService.js')).userService();
-var productService = new (require('../service/productService.js')).productService();
+var taskService = new (require('../service/taskService.js')).taskService();
 
 
 /* GET users listing. */
@@ -29,14 +29,14 @@ router.get('/:userId/tasks', function(req, res, next) {
     if (!user) {
       return res.status(404).send('No user found.');
     }
-    productService.getProductsFromIds(user.tasks, function(err, products) {
+    taskService.getTasksFromIds(user.tasks, function(err, tasks) {
       if (err) {
         return res.status(500).send('There was a problem finding the product.');
       }
-      if (!products) {
+      if (!tasks) {
         return res.status(404).send('No product found.');
       }
-      res.status(200).send({ response: products });
+      res.status(200).send({ response: tasks });
     });
   });
 });
@@ -59,7 +59,7 @@ router.put('/:userId/addTask', function(req, res, next) {
         .status(400)
         .send({ message: 'This product is already in cart.' });
     }
-    productService.addTask(req.body.name, req.body.type, req.body.description, req.body.checkboxes, function(err, task) {
+    taskService.addTask(req.body.name, req.body.type, req.body.description, req.body.checkboxes, function(err, task) {
       if (err) {
         return res.status(500).send('There was a problem adding the task.');
       }

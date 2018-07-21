@@ -1,23 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
-var productService = new (require('../service/productService.js')).productService();
+var taskService = new (require('../service/taskService.js')).taskService();
 
 /* GET products listing. */
 router.get('/', function(req, res, next) {
 
-    productService.getProducts(function (err, products) {
+    taskService.getTasks(function (err, tasks) {
         if (err) {
-            return res.status(500).send({message:"There was a problem finding the products."});
+            return res.status(500).send({message:"There was a problem finding the tasks."});
         }
-        res.status(200).send({'response':products});        
+        res.status(200).send({'response':tasks});        
     })
 });
 
 
 router.post('/addTask', function(req, res, next) {
 
-    productService.createTask(function (name, type, description, checkboxes, task) {
+    taskService.createTask(function (name, type, description, checkboxes, task) {
         if (err) {
             return res.status(500).send({message:"There was a problem adding the task"});
         }

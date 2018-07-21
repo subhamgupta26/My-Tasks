@@ -1,15 +1,15 @@
 var Task = require("../models/task.js");
 
-productProvider = function () {
-    this.getProducts = function (callback) {
-        Task.find(function (err, products) {
-            callback(err, products);
+taskProvider = function () {
+    this.getTasks = function (callback) {
+        Task.find(function (err, tasks) {
+            callback(err, tasks);
         });
     };
 
-    this.getProductsFromIds = function (productIds,callback) {
-        Task.find({ _id: { $in: productIds } }, function(err, products) {
-            callback(err,products);
+    this.getTasksFromIds = function (productIds,callback) {
+        Task.find({ _id: { $in: productIds } }, function(err, tasks) {
+            callback(err,tasks);
         });
     };
 
@@ -30,4 +30,4 @@ productProvider = function () {
     }
 }
 
-exports.productProvider = productProvider;
+exports.taskProvider = taskProvider;
