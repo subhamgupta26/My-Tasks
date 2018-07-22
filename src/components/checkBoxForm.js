@@ -43,7 +43,7 @@ class CheckBoxForm extends Component {
  <input
  type='button'
  style={ style.commentFormPost }
- value='Post' onClick={this.handleSubmit}/>
+ value='Add' onClick={this.handleSubmit}/>
  </div>
  )
  }

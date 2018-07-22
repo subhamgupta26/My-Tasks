@@ -5,8 +5,8 @@ var request = require('request');
 require('../passport')();
 var { generateToken, sendToken } = require('../utils/tokenUtils');
 
-// var jwt = require('jsonwebtoken');
-// var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 var config = require('../config');
 
 
@@ -23,18 +23,18 @@ router.post('/signup', function (req, res, next) {
     }
     else{
   
-  // var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-  var hashedPassword = ''
+  var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  // var hashedPassword = ''
 
   userService.createUser(req.body.email, req.body.name, hashedPassword,function(err, user){
-      // if (err) {
-      //   return res.status(500).send({ message: "There was a problem adding the information to the database." });
-      // }
-      // var token = jwt.sign({ id: user._id }, config.secret, {
-      //   expiresIn: 86400 // expires in 24 hours
-      // });
-      // res.status(200).send({ auth: true, token: token });    
-      res.status(200).send({message:'test'});
+      if (err) {
+        return res.status(500).send({ message: "There was a problem adding the information to the database." });
+      }
+      var token = jwt.sign({ id: user._id }, config.secret, {
+        expiresIn: 86400 // expires in 24 hours
+      });
+      res.status(200).send({ auth: true, token: token });    
+      // res.status(200).send({message:'test'});
   });
     }
   });

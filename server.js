@@ -16,7 +16,7 @@ var app = express();
 var User= require('./models/user');
  var Task= require('./models/task');
 
-// var VerifyToken = require('./auth/VerifyToken');
+var VerifyToken = require('./auth/VerifyToken');
 
 
 
@@ -38,8 +38,8 @@ var corsOption = {
 app.use(cors(corsOption))
 
 app.use('/', index);
-app.use('/users', users);
-app.use('/tasks', tasks);
+app.use('/users',VerifyToken, users);
+app.use('/tasks',VerifyToken, tasks);
 app.use('/public', public);
 
 // catch 404 and forward to error handler

@@ -14,32 +14,62 @@ class Home extends Component {
     this.state = { data: [] };
     this.loadTasksFromServer(); // = this.loadTasksFromServer.bind(this);
     this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
+
   }
   loadTasksFromServer() {
     console.log('inside load');
+    const token = localStorage.getItem('token');
+    let config = {
+      headers: {
+        authorization: token,
+      }
+    }
     axios
-      .get(this.props.url + 'users/5b5049a0e81ef56e1013d40c/tasks')
-      .then(res => {
-        this.setState({ data: res.data.response });
+      .get(this.props.url + 'users/current', config)
+      .then(resCurrent => {
+        let userId = resCurrent.data._id;
+        axios
+          .get(this.props.url + 'users/' + userId + '/tasks', config)
+          .then(res => {
+            this.setState({ data: res.data.response });
+          })
+          .catch(e => {
+            console.log(e);
+          });
       })
       .catch(e => {
         console.log(e);
       });
+
   }
   handleTaskSubmit(task) {
-      console.log('inside home task');
+    console.log('inside home task');
+    const token = localStorage.getItem('token');
+    let config = {
+      headers: {
+        authorization: token,
+      }
+    }
     let tasks = this.state.data;
     task.id = Date.now();
     let newTasks = tasks.concat([task]);
     // this.setState({ data: newTasks });
-    console.log('task',task);
-    axios.put(this.props.url+'users/5b5049a0e81ef56e1013d40c/addTask', task).then((response)=>{
-        this.loadTasksFromServer();
-    }).catch(err => {
-      console.error(err);
-      //this.setState({ data: tasks });
-      
-    });
+    console.log('task', task);
+    axios
+      .get(this.props.url + 'users/current', config)
+      .then(resCurrent => {
+        let userId = resCurrent.data._id;
+        axios.put(this.props.url + 'users/'+userId+'/addTask', task, config).then((response) => {
+          this.loadTasksFromServer();
+        }).catch(err => {
+          console.error(err);
+          //this.setState({ data: tasks });
+
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
   render() {
