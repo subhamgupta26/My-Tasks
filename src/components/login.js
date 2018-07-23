@@ -3,6 +3,7 @@ import { GoogleLogin } from 'react-google-login';
 import Home from './home';
 import Signup from './signup';
 import axios from 'axios';
+import '../styles/login.css';
 
 class Login extends Component {
 
@@ -101,8 +102,8 @@ class Login extends Component {
                 </div>
             ) :
             (
-                <div>
-                    <div>Login</div>
+                <div className='login-div'>
+                    <div className='login-header'>Login</div>
                     <div>
                     <input type="text" placeholder="email" value={this.state.email} onChange={ this.handleEmailChange }/>
                     <input type="text" placeholder="password" value={this.state.password} onChange={ this.handlePasswordChange }/>
@@ -126,7 +127,7 @@ class Login extends Component {
         }
 
         return (
-            <div className="App">
+            <div className="parent-container">
                 {content}
             </div>
         );

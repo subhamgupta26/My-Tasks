@@ -3,6 +3,7 @@ import { GoogleLogin } from 'react-google-login';
 import Home from './home';
 import Login from './login';
 import axios from 'axios';
+import '../styles/signup.css';
 
 class Signup extends Component {
     constructor() {
@@ -70,10 +71,10 @@ class Signup extends Component {
 
     render() {
         let content = this.state.signup ? (
-            <div className="App">
+            <div >
                 <div>Signup</div>
                 <div>
-                    <input type="text" placeholder="username" value={this.state.username} onChange={ this.handleNameChange }/>
+                    <input  type="text" placeholder="username" value={this.state.username} onChange={ this.handleNameChange }/>
                     <input type="text" placeholder="email" value={this.state.email} onChange={ this.handleEmailChange }/>
                     <input type="text" placeholder="password" value={this.state.password} onChange={ this.handlePasswordChange }/>
                     <input type="text" placeholder="confirm password" value={this.state.confirmPassword} onChange={ this.handleConfirmPasswordChange }/>
@@ -92,7 +93,7 @@ class Signup extends Component {
                 <Login />
             );
         return (
-            <div className="App">
+            <div className="container">
                 {content}
             </div>
         );
