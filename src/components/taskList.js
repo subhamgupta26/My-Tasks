@@ -8,6 +8,9 @@ class TaskList extends Component {
 handleTaskChange=(task)=>{
     this.props.onTaskChange(task); 
 }
+handleTaskUpdate=(task)=>{
+    this.props.onTaskUpdate(task); 
+}
  render() {
  let taskNodes = this.props.data.map(task => {
      console.log('task',task);
@@ -22,7 +25,7 @@ handleTaskChange=(task)=>{
      }
      else{
  return (
- <Task name={ task.name } key={ task['_id'] } description= {task.description} task={task} onTaskChange={this.handleTaskChange}>
+ <Task name={ task.name } key={ task['_id'] } id={task._id} description= {task.description} task={task} onTaskChange={this.handleTaskChange} onTaskUpdate={this.handleTaskUpdate}>
  { task.text}
  </Task>
  )

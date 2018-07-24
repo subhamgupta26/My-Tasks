@@ -25,8 +25,8 @@ router.post('/addTask', function(req, res, next) {
     })
 });
 
-router.post('/updateTask', function(req, res, next) {
-
+router.put('/updateTask', function(req, res, next) {
+    console.log('inside update task');
     taskService.updateTask(req.body._id,req.body,function (err, task) {
         if (err) {
             return res.status(500).send({message:"There was a problem updating the task"});

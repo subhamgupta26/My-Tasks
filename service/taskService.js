@@ -20,7 +20,7 @@ taskService = function () {
     }
 
     this.updateTask = function (taskId, task ,callback) {
-        taskProvider.removeTask(taskId,task,function (err , task){
+        taskProvider.updateTask(taskId,task,function (err , task){
             callback(err,task);
         });
     };
