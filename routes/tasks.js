@@ -25,4 +25,14 @@ router.post('/addTask', function(req, res, next) {
     })
 });
 
+router.post('/updateTask', function(req, res, next) {
+
+    taskService.updateTask(req.body._id,req.body,function (err, task) {
+        if (err) {
+            return res.status(500).send({message:"There was a problem updating the task"});
+        }
+        res.status(200).send({'response':task});        
+    })
+});
+
 module.exports = router;

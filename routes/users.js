@@ -102,4 +102,53 @@ router.get('/current', function(req, res, next) {
   });
 });
 
+router.put('/:userId/removeTask', function(req, res, next) {
+  console.log('inside user update cart');
+
+  userService.getUserById(req.params.userId, function(err,user){
+    if (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .send({ message: 'There was a problem finding the user.' });
+    }
+    if (!user) {
+      return res.status(404).send({ message: 'No user found.' });
+    }
+    if (user.tasks.indexOf(req.body.id) < -1) {
+      return res
+        .status(400)
+        .send({ message: 'This product is not in the cart.' });
+    }
+    taskService.removeTask(req.body._id, function(err, task) {
+      if (err) {
+        return res.status(500).send('There was a deleting adding the task.');
+      }
+      if (!task) {
+        return res.status(404).send('cannot delete task');
+      }
+          
+    // user.tasks.pop(req.body._id);  
+    for( var i = 0; i < user.tasks.length-1; i++){ 
+      if ( user.tasks[i] === req.body._id) {
+        arr.splice(i, 1); 
+      }
+   }  
+
+    userService.updateUser(user.id, user ,function(err, user){
+      if (err) {
+        console.log(err);
+        return res
+          .status(500)
+          .send({ message: 'There was a problem updating the task.' });
+      }
+      if (!user) {
+        return res.status(404).send({ message: 'Updation failed' });
+      }
+      res.status(200).send({ message: 'Update Successful!!' });      
+    });
+  });
+  });
+});
+
 module.exports = router;

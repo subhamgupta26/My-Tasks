@@ -28,6 +28,18 @@ taskProvider = function () {
                 callback(err, task)
             });
     }
+
+    this.updateTask = function (taskId, task, callback) {
+        Task.update({ _id: taskId }, task, function (err, task) {
+            callback(err, task);
+        });
+    };
+
+    this.removeTask = function (taskId, callback) {
+        Task.remove({ _id: taskId }, function (err, task) {
+            callback(err, task);
+        });
+    };
 }
 
 exports.taskProvider = taskProvider;

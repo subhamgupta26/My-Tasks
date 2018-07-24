@@ -7,10 +7,15 @@ class Task extends Component {
 //  let rawMarkup = marked(this.props.children.toString());
 //  return { __html: rawMarkup };
  }
+ deleteTask=()=>{
+    this.props.onTaskChange(this.props.task); 
+ }
  render() {
  return (
  <div style={ style.comment }>
- <h3>{this.props.name}</h3>
+ <div>
+ <h3>{this.props.name}
+ <i style={{float:'right'}} className="fa fa-times" onClick={ this.deleteTask }></i></h3></div>
 <span>{this.props.description}</span>
  </div>
  )

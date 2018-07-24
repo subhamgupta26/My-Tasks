@@ -18,6 +18,18 @@ taskService = function () {
             callback(err, task);
         });
     }
+
+    this.updateTask = function (taskId, task ,callback) {
+        taskProvider.removeTask(taskId,task,function (err , task){
+            callback(err,task);
+        });
+    };
+
+    this.removeTask = function (taskId ,callback) {
+        taskProvider.removeTask(taskId,function (err , task){
+            callback(err,task);
+        });
+    };
 }
 
 exports.taskService = taskService;

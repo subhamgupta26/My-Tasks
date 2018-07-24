@@ -105,9 +105,13 @@ class Login extends Component {
                 <div className='login-div'>
                     <div className='login-header'>Login</div>
                     <div>
-                    <input type="text" placeholder="email" value={this.state.email} onChange={ this.handleEmailChange }/>
-                    <input type="text" placeholder="password" value={this.state.password} onChange={ this.handlePasswordChange }/>
-                    <div>
+                    <div className='email-div'>
+                    <input className='email-input' type="text" placeholder="email" value={this.state.email} onChange={ this.handleEmailChange }/>
+                    </div>
+                    <div className='email-div'>
+                    <input className='email-input' type="text" placeholder="password" value={this.state.password} onChange={ this.handlePasswordChange }/>
+                    </div>
+                    <div className='buttons-parent'>
                         <button onClick={this.login} className="button">
                             Log in
                         </button>
